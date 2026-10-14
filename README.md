@@ -227,7 +227,7 @@ When batch jobs fail, failed file names are listed at the end.
 
 ## License
 
-Specify your license here (e.g. MIT).
+MIT
 
 ---
 
