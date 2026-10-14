@@ -1,0 +1,1 @@
+python3 disall_v3_mtreads.py dc1 asm 8 --max-structs 0
