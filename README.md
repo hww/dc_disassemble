@@ -234,3 +234,83 @@ MIT
 ## Credits
 
 Reverse-engineering research on Naughty Dog's DC scripting VM. Instruction semantics and structure layouts are the result of community analysis of retail builds of *Uncharted 4: A Thief's End* and *The Last of Us Part I*.
+
+## Example
+
+```asm
+Loaded 1955 SIDs (0 skipped) from 1955 lines
+
+=== Файл: dc1/ss/ss-attackable-sound.bin ===
+
+=== HEADER INFORMATION ===
+Magic: DC00
+Version: 0x00000001
+Text size: 0x0000016C
+Strings offset: 0x00000000
+Always1: 0x00000001
+Definition count: 1
+Definition table offset: 0x0000001C
+Reloc table size: 12 bytes (11 slots)
+
+=== DEFINITIONS SUMMARY ===
+Total definitions: 1
+
+#    Offset   Name                 NameId       Type         TypeId      
+-------------------------------------------------------------------------------------
+0    0x1C     ss-attackable-sound  0xE688EDE5 state-script 0x45C51F9F
+
+
+Name: ss-attackable-sound  NameId: 0xE688EDE5
+Type: state-script  TypeId: 0x45C51F9F
+Defn: 0x0000001C: Body at: 0x0000002C:
+  StateScript {
+    m_stateScriptId  = 0xE688EDE5 (?)
+    m_pSsDeclList    = 0x0000
+    m_initialStateId = 0x8E93AC28 (?)
+    m_pSsOptions     = 0x0000
+    m_pSsStateTable  = 0x005C
+    m_stateCount     = 1
+    m_line           = 3
+    m_pDebugFileName = 0x0135
+      "t1final/t1/src/game/script/ss/ss-attackable-sound.dc"
+    m_pErrorName     = 0x00000000
+  }
+    SsState[1] {
+      [0] stateId=0x8E93AC28 (0x8E93AC28) numSsOnBlocks=1 pSsOnBlocks=0x006C
+        SsOnBlock[1] {
+          [0] eventId=0x0539335E (0x0539335E) type=Event totalLambdas=1 numTracks=1 aTracks=0x0090 name=0x010C
+              name="ss-attackable-sound initial (on (event))"
+            SsTrack[1] {
+              [0] @0x0090 trackId=0x87F13BC2 (0x87F13BC2) trackIdx=0 totalLambdas=1 pSsLambda=0x00A0 type=0x1ED2E0A2 (array)
+                SsLambda[1] {
+                  [0] pScriptLambda=0x00AC counter=8
+                    ScriptLambda @0x00AC {
+                      m_pInstruction = 0x00C0
+                      m_pSymbols     = 0x00F8
+                      m_typeId       = 0xAB3EB31F (function)
+                      m_type         = 0x15000000 (0x15000000)
+                    }
+                      SymbolTable[2] {
+                        [0] 0x3670E863 sid: play-sound-at-joint
+                        [1] 0x0B1B1B8A sid: tag-symbol
+                      }
+                      --- bytecode (14 instructions) ---
+0x000000C0: 15 00 00 00 lookupPointer r0, r0, r0
+0x000000C4: 15 01 01 00 lookupPointer r1, r1, r0
+0x000000C8: 3F 02 02 00 loadStaticI32Imm r2, r2, r0
+0x000000CC: 3F 03 03 00 loadStaticI32Imm r3, r3, r0
+0x000000D0: 43 18 02 00 move r24, r2, r0
+0x000000D4: 43 19 03 00 move r25, r3, r0
+0x000000D8: 1C 01 01 02 callFf r1, r1, r2
+0x000000DC: 3F 02 03 00 loadStaticI32Imm r2, r3, r0
+0x000000E0: 3F 03 04 00 loadStaticI32Imm r3, r4, r0
+0x000000E4: 43 18 01 00 move r24, r1, r0
+0x000000E8: 43 19 02 00 move r25, r2, r0
+0x000000EC: 43 1A 03 00 move r26, r3, r0
+0x000000F0: 1C 00 00 03 callFf r0, r0, r3
+0x000000F4: 00 00 00 00 return r0, r0, r0
+                }
+            }
+        }
+    }
+```
